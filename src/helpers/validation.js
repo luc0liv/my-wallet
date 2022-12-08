@@ -10,10 +10,9 @@ const validateDisabledButton = (state) => {
     password,
   } = state;
 
-  // eslint-disable-next-line max-len
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegex = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/;
   // Regex encontrado aqui:
-  // https://emailregex.com/
+  // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
   const validEmail = emailRegex.test(email);
   const emptyFields = checkForEmptyFields(email, password);
   const passwordLength = password.length >= MIN_LENGTH;
