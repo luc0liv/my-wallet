@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import validateDisabledButton from '../helpers/validation';
+import { saveUserInfo } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -20,6 +23,12 @@ class Login extends React.Component {
         }));
       },
     );
+  };
+
+  handleSubmit = () => {
+    const { dispatch, history } = this.props;
+    dispatch(saveUserInfo({ ...this.state }));
+    history.push('/carteira');
   };
 
   render() {
@@ -52,11 +61,23 @@ class Login extends React.Component {
             />
           </label>
 
-          <button type="button" disabled={ isButtonDisabled }>Entrar</button>
+          <button
+            type="button"
+            disabled={ isButtonDisabled }
+            onClick={ this.handleSubmit }
+          >
+            Entrar
+          </button>
         </form>
       </section>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired }).isRequired,
+};
+
+export default connect()(Login);

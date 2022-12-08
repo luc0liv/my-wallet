@@ -9,13 +9,15 @@ const validateDisabledButton = (state) => {
     email,
     password,
   } = state;
-  const emailRegex = /^[A-Za-z0-9_!#$%&'*+\\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm;
+
+  /* eslint max-len: ["error", { "ignoreRegExpLiterals": true }] */
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // Regex encontrado aqui:
-  // https://www.abstractapi.com/guides/email-validation-regex-javascript
+  // https://emailregex.com/
   const validEmail = emailRegex.test(email);
   const emptyFields = checkForEmptyFields(email, password);
   const passwordLength = password.length >= MIN_LENGTH;
-  return emptyFields || !validEmail || !passwordLength;
+  return !validEmail || !passwordLength || emptyFields;
 };
 
 export default validateDisabledButton;
