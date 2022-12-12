@@ -23,6 +23,11 @@ function walletReducer(state = INITIAL_STATE, action) {
       ...state,
       error: action.error,
     };
+  case 'SAVE_INFO':
+    return {
+      ...state,
+      expenses: [...state.expenses, action.payload],
+    };
   default:
     return state;
   }

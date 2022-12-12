@@ -5,10 +5,8 @@ export const saveUserInfo = (user) => ({
   payload: user,
 });
 
-const WALLET_ACTION = 'WALLET_ACTION';
-
 export const saveWalletInfo = (wallet) => ({
-  type: WALLET_ACTION,
+  type: 'SAVE_INFO',
   payload: wallet,
 });
 
