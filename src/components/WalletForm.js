@@ -14,7 +14,7 @@ class WalletForm extends Component {
     currency: 'USD',
     value: 0,
     description: '',
-    id: 0,
+    // id: 0,
   };
 
   handleChange = ({ target }) => {
