@@ -5,9 +5,9 @@ export const saveUserInfo = (user) => ({
   payload: user,
 });
 
-export const saveWalletInfo = (wallet) => ({
+export const saveWalletInfo = (wallet, currencies) => ({
   type: 'SAVE_INFO',
-  payload: wallet,
+  payload: { wallet, currencies },
 });
 
 export const beginCurrencyList = () => ({
@@ -15,7 +15,7 @@ export const beginCurrencyList = () => ({
 });
 
 export const listCurrencies = (currencies) => ({
-  type: 'LIST_SUCCESS', currencies: Object.keys(currencies),
+  type: 'LIST_SUCCESS', currencies,
 });
 
 export const listCurrenciesFailure = (error) => ({

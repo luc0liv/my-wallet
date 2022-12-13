@@ -26,7 +26,14 @@ function walletReducer(state = INITIAL_STATE, action) {
   case 'SAVE_INFO':
     return {
       ...state,
-      expenses: [...state.expenses, { id: state.expenses.length, ...action.payload }],
+      expenses: [
+        ...state.expenses,
+        {
+          id: state.expenses.length,
+          ...action.payload.wallet,
+          exchangeRates: action.payload.currencies,
+        },
+      ],
     };
   default:
     return state;

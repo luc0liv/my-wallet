@@ -14,7 +14,6 @@ class WalletForm extends Component {
     currency: 'USD',
     value: 0,
     description: '',
-    // id: 0,
   };
 
   handleChange = ({ target }) => {
@@ -24,9 +23,16 @@ class WalletForm extends Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { dispatch } = this.props;
-    dispatch(saveWalletInfo({ ...this.state }));
+    const requestCurrencies = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const currenciesList = await requestCurrencies.json();
+    // const { USDT, ...newCurrenciesList } = currenciesList;
+    dispatch(saveWalletInfo(this.state, currenciesList));
+    this.setState({
+      value: '',
+      description: '',
+    });
   };
 
   render() {
@@ -66,7 +72,7 @@ class WalletForm extends Component {
             value={ currency }
             onChange={ this.handleChange }
           >
-            {currencies.map((option) => (
+            {Object.keys(currencies).map((option) => (
               <option key={ option }>{option}</option>
             ))}
           </select>
@@ -110,7 +116,7 @@ class WalletForm extends Component {
 }
 
 WalletForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currencies: PropTypes.arrayOf(Object).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
