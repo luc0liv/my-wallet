@@ -7,7 +7,7 @@ class Header extends Component {
   sumTotalExpenses = () => {
     const { expenses } = this.props;
     if (!expenses.length) {
-      return '';
+      return '0';
     }
     const expensesSum = expenses.reduce(
       (total, expense) => total + expense

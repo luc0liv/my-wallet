@@ -16,7 +16,7 @@ function walletReducer(state = INITIAL_STATE, action) {
   case 'LIST_SUCCESS':
     return {
       ...state,
-      currencies: action.currencies,
+      currencies: Object.keys(action.currencies),
     };
   case 'LIST_FAILURE':
     return {
