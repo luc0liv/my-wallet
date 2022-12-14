@@ -11,9 +11,19 @@ class Table extends Component {
     { name: 'Moeda', key: 'currency' },
     // { name: 'Câmbio utilizado', key: '' },
     // { name: 'Valor convertido', key: '' },
-    // { name: 'Moeda de conversão', key: '' },
+    { name: 'Moeda de conversão', key: 'conversionCoin' },
     // { name: 'Editar/Excluir', key: '' },
   ];
+
+  expensesToNewObject = (expenses) => {
+    const newObj = expenses.map((expense) => ({
+      ...expense,
+      currency: expense.exchangeRates[expense.currency].name,
+      conversionCoin: 'Real',
+      value: Number(expense.value).toFixed(2),
+    }));
+    return newObj;
+  };
 
   render() {
     const { expenses } = this.props;
@@ -28,7 +38,7 @@ class Table extends Component {
         </thead>
         <tbody>
           {expenses.length !== 0
-            && expenses.map((expense) => (
+            && this.expensesToNewObject(expenses).map((expense) => (
               <tr key={ expense.id }>
                 {this.tableHeaders.map((header, hIndex) => (
                   <td key={ hIndex }>{expense[header.key]}</td>
