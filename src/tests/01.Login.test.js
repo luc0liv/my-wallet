@@ -104,7 +104,7 @@ describe('Teste o componente Login.js', () => {
     expect(passwordInput).toHaveValue(testPassword);
     expect(emailInput).toHaveValue(testEmail);
 
-    expect(loginButton).not.toBeDisabled();
+    expect(loginButton).toBeEnabled();
 
     userEvent.click(loginButton);
 
