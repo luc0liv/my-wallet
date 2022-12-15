@@ -52,8 +52,9 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.length !== 0
-            && this.expensesToNewObject(expenses).map((expense) => (
+          {expenses.length === 0
+            ? <tr><td><span>Não existem despesas para exibir.</span></td></tr>
+            : this.expensesToNewObject(expenses).map((expense) => (
               <tr key={ expense.id }>
                 {this.tableHeaders.map((header, hIndex) => (header.key !== 'buttons' ? (
                   <td key={ hIndex }>{expense[header.key]}</td>
