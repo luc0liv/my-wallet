@@ -16,10 +16,10 @@ class Table extends Component {
   ];
 
   convertExchangeValue = (exchange, expense) => {
-    const convertExchange = Number(exchange[expense.currency].ask);
-    const convertValue = Number(expense.value);
-    const calculate = (convertExchange * convertValue).toFixed(2);
-    return calculate;
+    const transformExchange = Number(exchange[expense.currency].ask);
+    const transformValue = Number(expense.value);
+    const convertValues = (transformExchange * transformValue).toFixed(2);
+    return convertValues;
   };
 
   expensesToNewObject = (expenses) => {
