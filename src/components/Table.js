@@ -9,20 +9,29 @@ class Table extends Component {
     { name: 'Método de pagamento', key: 'method' },
     { name: 'Valor', key: 'value' },
     { name: 'Moeda', key: 'currency' },
-    // { name: 'Câmbio utilizado', key: '' },
-    // { name: 'Valor convertido', key: '' },
+    { name: 'Câmbio utilizado', key: 'ask' },
+    { name: 'Valor convertido', key: 'convertedValue' },
     { name: 'Moeda de conversão', key: 'conversionCoin' },
-    // { name: 'Editar/Excluir', key: '' },
+    { name: 'Editar/Excluir', key: 'buttons' },
   ];
 
+  convertExchangeValue = (exchange, expense) => {
+    const convertExchange = Number(exchange[expense.currency].ask);
+    const convertValue = Number(expense.value);
+    const calculate = (convertExchange * convertValue).toFixed(2);
+    return calculate;
+  };
+
   expensesToNewObject = (expenses) => {
-    const newObj = expenses.map((expense) => ({
+    const newExpenses = expenses.map((expense) => ({
       ...expense,
       currency: expense.exchangeRates[expense.currency].name,
       conversionCoin: 'Real',
       value: Number(expense.value).toFixed(2),
+      ask: Number(expense.exchangeRates[expense.currency].ask).toFixed(2),
+      convertedValue: this.convertExchangeValue(expense.exchangeRates, expense),
     }));
-    return newObj;
+    return newExpenses;
   };
 
   render() {
@@ -40,9 +49,14 @@ class Table extends Component {
           {expenses.length !== 0
             && this.expensesToNewObject(expenses).map((expense) => (
               <tr key={ expense.id }>
-                {this.tableHeaders.map((header, hIndex) => (
+                {this.tableHeaders.map((header, hIndex) => (header.key !== 'buttons' ? (
                   <td key={ hIndex }>{expense[header.key]}</td>
-                ))}
+                ) : (
+                  <td key={ hIndex }>
+                    <button type="button">Editar</button>
+                    <button type="button">Excluir</button>
+                  </td>
+                )))}
               </tr>
             ))}
         </tbody>
