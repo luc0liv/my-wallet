@@ -35,6 +35,11 @@ function walletReducer(state = INITIAL_STATE, action) {
         },
       ],
     };
+  case 'DELETE_INFO':
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.expenseId),
+    };
   default:
     return state;
   }

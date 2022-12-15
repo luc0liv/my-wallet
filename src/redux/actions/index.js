@@ -22,6 +22,10 @@ export const listCurrenciesFailure = (error) => ({
   type: 'LIST_FAILURE', error,
 });
 
+export const deleteExpense = (expenseId) => ({
+  type: 'DELETE_INFO', expenseId,
+});
+
 export const getCurrencies = () => async (dispatch) => {
   dispatch(beginCurrencyList());
   try {
