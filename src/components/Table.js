@@ -37,7 +37,6 @@ class Table extends Component {
 
   deleteSelectedExpense = (expense) => {
     const { dispatch } = this.props;
-    console.log(expense);
     dispatch(deleteExpense(expense.id));
   };
 
@@ -80,6 +79,7 @@ class Table extends Component {
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(Object).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
