@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { deleteExpense } from '../redux/actions';
 
 class Table extends Component {
   tableHeaders = [
@@ -34,6 +35,12 @@ class Table extends Component {
     return newExpenses;
   };
 
+  deleteSelectedExpense = (expense) => {
+    const { dispatch } = this.props;
+    console.log(expense);
+    dispatch(deleteExpense(expense.id));
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -53,8 +60,14 @@ class Table extends Component {
                   <td key={ hIndex }>{expense[header.key]}</td>
                 ) : (
                   <td key={ hIndex }>
-                    <button type="button">Editar</button>
-                    <button type="button">Excluir</button>
+                    <button type="button" data-testid="edit-btn">Editar</button>
+                    <button
+                      type="button"
+                      data-testid="delete-btn"
+                      onClick={ () => this.deleteSelectedExpense(expense) }
+                    >
+                      Excluir
+                    </button>
                   </td>
                 )))}
               </tr>
