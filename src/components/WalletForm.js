@@ -23,14 +23,19 @@ class WalletForm extends Component {
     });
   };
 
-  handleSubmit = async () => {
-    const { dispatch } = this.props;
+  fetchCurrencies = async () => {
     const requestCurrencies = await fetch(
       'https://economia.awesomeapi.com.br/json/all',
     );
     const currenciesList = await requestCurrencies.json();
-    // const { USDT, ...newCurrenciesList } = currenciesList;
-    dispatch(saveWalletInfo(this.state, currenciesList));
+    return currenciesList;
+  };
+
+  handleSubmit = async () => {
+    const { dispatch } = this.props;
+    const currencies = await this.fetchCurrencies();
+    // const { USDT, ...newCurrencies } = currencies;
+    dispatch(saveWalletInfo(this.state, currencies));
     this.setState({
       value: '',
       description: '',
@@ -39,11 +44,8 @@ class WalletForm extends Component {
 
   handleEdit = async () => {
     const { dispatch, idToEdit } = this.props;
-    const requestCurrencies = await fetch(
-      'https://economia.awesomeapi.com.br/json/all',
-    );
-    const currenciesList = await requestCurrencies.json();
-    dispatch(editExpense(idToEdit, this.state, currenciesList));
+    const currencies = await this.fetchCurrencies();
+    dispatch(editExpense(idToEdit, this.state, currencies));
   };
 
   render() {
