@@ -51,7 +51,8 @@ function walletReducer(state = INITIAL_STATE, action) {
       editor: false,
       expenses: state.expenses.map(
         (expense) => (expense.id === action.expenseId
-          ? { ...action.editedExpense, exchangeRates: action.currencies } : expense),
+          ? { ...action.editedExpense, exchangeRates: action.currencies, id: expense.id }
+          : expense),
       ),
     };
   default:
