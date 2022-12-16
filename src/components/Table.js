@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, getEditingInfo } from '../redux/actions';
 
 class Table extends Component {
   tableHeaders = [
@@ -40,6 +40,12 @@ class Table extends Component {
     dispatch(deleteExpense(expense.id));
   };
 
+  editSelectedExpense = (expense) => {
+    // envia as informações da despesa a ser editada
+    const { dispatch } = this.props;
+    dispatch(getEditingInfo(true, expense.id));
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -60,7 +66,13 @@ class Table extends Component {
                   <td key={ hIndex }>{expense[header.key]}</td>
                 ) : (
                   <td key={ hIndex }>
-                    <button type="button" data-testid="edit-btn">Editar</button>
+                    <button
+                      type="button"
+                      data-testid="edit-btn"
+                      onClick={ () => this.editSelectedExpense(expense) }
+                    >
+                      Editar
+                    </button>
                     <button
                       type="button"
                       data-testid="delete-btn"
