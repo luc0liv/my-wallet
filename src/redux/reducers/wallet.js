@@ -15,14 +15,10 @@ function walletReducer(state = INITIAL_STATE, action) {
     };
   case 'LIST_SUCCESS':
     return {
-      ...state,
-      currencies: Object.keys(action.currencies),
+      ...state, currencies: Object.keys(action.currencies),
     };
   case 'LIST_FAILURE':
-    return {
-      ...state,
-      error: action.error,
-    };
+    return { ...state, error: action.error };
   case 'SAVE_INFO':
     return {
       ...state,
@@ -38,7 +34,25 @@ function walletReducer(state = INITIAL_STATE, action) {
   case 'DELETE_INFO':
     return {
       ...state,
-      expenses: state.expenses.filter((expense) => expense.id !== action.expenseId),
+      expenses: state.expenses.filter(
+        (expense) => expense.id !== action.expenseId,
+      ),
+    };
+  case 'SEND_EDIT':
+    // reducer p/ enviar as infos da despesa a ser editada
+    return {
+      ...state,
+      editor: action.edit,
+      idToEdit: action.expenseId,
+    };
+  case 'EDIT_INFO':
+    return {
+      ...state,
+      editor: false,
+      expenses: state.expenses.map(
+        (expense) => (expense.id === action.expenseId
+          ? { ...action.editedExpense, exchangeRates: action.currencies } : expense),
+      ),
     };
   default:
     return state;

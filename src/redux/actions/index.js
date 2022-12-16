@@ -26,6 +26,19 @@ export const deleteExpense = (expenseId) => ({
   type: 'DELETE_INFO', expenseId,
 });
 
+export const getEditingInfo = (edit, expenseId) => ({
+  type: 'SEND_EDIT',
+  edit,
+  expenseId,
+});
+
+export const editExpense = (expenseId, editedExpense, currencies) => ({
+  type: 'EDIT_INFO',
+  expenseId,
+  editedExpense,
+  currencies,
+});
+
 export const getCurrencies = () => async (dispatch) => {
   dispatch(beginCurrencyList());
   try {
