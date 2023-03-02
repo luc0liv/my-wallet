@@ -1,13 +1,28 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Trybe Wallet :money_with_wings:
+## Projeto realizado durante o curso de Desenvolvimento Web da Trybe.
+#### Módulo de Frontend.
+---
+#### É uma aplicação que computa gastos em diferentes moedas e converte tudo para uma única moeda, que pode ser escolhida por quem usa. 
+#### As informações sobre nomes, cotações e outros dados sobre as moedas são da API de Cotações de Moedas. 
+#### O Redux foi utilizado para compartilhar o estado da aplicação entre seus vários componentes.
+---
+## Tecnologias utilizadas
+- React
+- Redux
+- React Testing Library
+- Javascript
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+## Como rodar a aplicação
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+### No terminal, clone o projeto
+`git clone https://github.com/luc0liv/my-wallet.git`
+
+### Entre na pasta do projeto
+`cd my-wallet`
+
+### Instale as dependências
+`npm install`
+
+### Rode a aplicação
+`npm start`
+
